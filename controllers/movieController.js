@@ -4,11 +4,20 @@ const connection = require('../data/db')
 const index = (req, res) => {
     const mysql = "SELECT * FROM movies";
     // eseguro la query
-    connection.query(mysql, (err, results) => {
+    connection.query(mysql, (err, movieResult) => {
         if (err) {
             return res.status(500).json({ error: "Database query failed" })
         }
-        res.json(results)
+
+        //ciclo l'array risultante per sovrascrivere il valore della proprietà img, così conterrà tutto il percorso dell'immagine
+        const movies = movieResult.map((movie) => {
+            const obj = {
+                ...movie,
+                image: req.imagePath + movie.image
+            }
+            return obj
+        })
+        res.json(movies)
     })
 }
 
@@ -41,7 +50,10 @@ const show = (req, res) => {
             };
             //aggiungo le recensioni al film
             movie.reviews = reviewResult;
-            res.json(movie)
+            res.json({
+                ...movie,
+                image: req.imagePath + movie.image
+            })
         })
     })
 }
