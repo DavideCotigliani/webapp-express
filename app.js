@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
     res.send("questa è la rotta base")
 })
 
-app.use("/movies", movieRouter)
+app.use("/api/movies", movieRouter)
 
 app.listen(port, () => {
     console.log(`server in ascolto sulla porta ${port}`);
