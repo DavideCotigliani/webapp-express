@@ -15,6 +15,14 @@ const index = (req, res) => {
 const show = (req, res) => {
     const id = req.params.id
 
+    const mysql = "SELECT * FROM movies WHERE id =?"
+
+    connection.query(mysql, [id], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: "Database query failed" })
+        }
+        res.json(results)
+    })
 }
 
 module.exports = {
