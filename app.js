@@ -1,10 +1,14 @@
 const express = require('express')
 const app = express()
-port = 3000
+
 const movieRouter = require("./routers/movie")
 // importo i middlewares
 const errorsHandler = require("./middlewares/errorsHandler")
 const notFound = require("./middlewares/notFound")
+
+//definisco il numero di porta su cui il server deve rimanere in ascolto
+const port = process.env.SERVER_PORT
+
 app.use(express.static('public'));
 
 app.use(express.json());
