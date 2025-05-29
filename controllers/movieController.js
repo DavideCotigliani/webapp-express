@@ -1,5 +1,9 @@
-const index = (req, res) => {
+//recupero la variabile di connessione
+const connection = require('../data/db')
 
+const index = (req, res) => {
+    const mysql = "SELECT * FROM movies";
+    // eseguro la query
 }
 const show = (req, res) => {
     const id = req.params.id
