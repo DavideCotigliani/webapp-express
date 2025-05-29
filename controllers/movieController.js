@@ -24,6 +24,7 @@ const show = (req, res) => {
     JOIN movies
     ON reviews.movie_id = movies.id
     WHERE movies.id= ?`
+
     //eseguo query per il recupero del film
     connection.query(movieSql, [id], (err, movieResult) => {
         if (err) {
