@@ -1,11 +1,17 @@
 const express = require('express')
 const app = express()
 
+//import il pacchetto CORS
+const cors = require('cors');
+
 const movieRouter = require("./routers/movie")
 // importo i middlewares
 const errorsHandler = require("./middlewares/errorsHandler")
 const notFound = require("./middlewares/notFound")
 const imagePathMiddleware = require('./middlewares/imagePath')
+
+// uso il middleware per il CORS
+app.use(cors({ origin: process.env.FE_APP }))
 
 //definisco il numero di porta su cui il server deve rimanere in ascolto
 const port = process.env.SERVER_PORT
