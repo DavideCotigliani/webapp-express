@@ -1,10 +1,15 @@
 const express = require('express')
 const app = express()
 
+// importo multer
+const multer = require('multer')
+const upload = multer();
+
 //import il pacchetto CORS
 const cors = require('cors');
 
 const movieRouter = require("./routers/movie")
+
 // importo i middlewares
 const errorsHandler = require("./middlewares/errorsHandler")
 const notFound = require("./middlewares/notFound")

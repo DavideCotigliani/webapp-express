@@ -58,7 +58,47 @@ const show = (req, res) => {
     })
 }
 
+// // metodo store
+// const store = (req, res, next) => {
+//     const { title, author, abstract, } = req.body;
+
+//     // creo la query di inserimento
+//     const sql = "INSERT INTO movies (title, author, abstract, image) VALUES (?,?,?,?)";
+
+//     const imageName = req.file.filename;
+
+//     // eseguo la query
+//     connection.query(sql, [title, author, abstract, imageName], (err, result) => {
+//         // se c'è un errore mi viene catturato e esegue direttamente la prossima istruzione 
+//         if (err) return next('Errore caricamento nuovo libro');
+//         // restituisco un oggetto di successo
+//         res.status(201).json({
+//             status: 'success',
+//             message: 'Libro inserito correttamente'
+//         })
+//     })
+// }
+
+// metodo store review
+const storeReview = (req, res) => {
+    const { id } = req.params
+
+    //recupero i dati del body
+    const { name, vote, text } = req.body;
+
+    //preparo la query
+    const sql = "INSERT INTO reviews (name, vote, text, movie_id) VALUES (?,?,?,?)" //qui c'è anche l'id del libro
+
+    //eseguo la query
+    connection.query(sql, [name, vote, text, id], (err, result) => {
+        if (err) return res.status(500).json({ error: "Database query failed" })
+        res.status(201).json({ message: "Recensione aggiunta", id: result.insertId })
+    })
+}
+
 module.exports = {
     index,
-    show
+    show,
+    // store,
+    storeReview
 }
